@@ -22,6 +22,7 @@ const ParkingsOverview = () => {
           <th scope="col">Parking</th>
           <th scope="col">Capaciteit</th>
           <th scope="col">Vrije plaatsen</th>
+          <th scope="col">Status</th>
         </tr>
       </thead>
       <tbody>
@@ -29,9 +30,14 @@ const ParkingsOverview = () => {
           parkings.map((parking) => {
             return (
               <tr key={parking.recordid}>
-                <td>{parking.fields.name}</td>
+                <td>
+                  <Link to={`parking/${PARKING_CONST.description}`}>
+                    {parking.fields.name}
+                  </Link>
+                </td>
                 <td>{parking.fields.totalcapacity}</td>
                 <td>{parking.fields.availablecapacity}</td>
+                <td>{parking.fields.open === "True" ? "Open" : "Gesloten"}</td>
               </tr>
             );
           })
@@ -44,6 +50,7 @@ const ParkingsOverview = () => {
             </td>
             <td>{PARKING_CONST.totalcapacity}</td>
             <td>{PARKING_CONST.availablecapacity}</td>
+            <td>{PARKING_CONST.open === "True" ? "Open" : "Gesloten"}</td>
           </tr>
         )}
       </tbody>

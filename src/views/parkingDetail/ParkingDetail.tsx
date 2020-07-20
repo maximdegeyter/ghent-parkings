@@ -1,12 +1,13 @@
 import React, { FC, useState, useEffect } from "react";
+import { withRouter, useHistory } from "react-router-dom";
 
 import { ParkingItemSchema } from "../parkingsOverview/ParkingsOverview.types";
 import Api from "../../api";
 import { ParkingDetailProps } from "./ParkingDetail.types";
-import { withRouter } from "react-router-dom";
 
 const ParkingDetail: FC<ParkingDetailProps> = ({ match }) => {
   const [parking, setParking] = useState<ParkingItemSchema>();
+  let history = useHistory();
 
   useEffect(() => {
     if (match.params.id) {
@@ -18,6 +19,13 @@ const ParkingDetail: FC<ParkingDetailProps> = ({ match }) => {
   return (
     <div className="App">
       <h2>{parking?.fields.name}</h2>
+      <button
+        type="button"
+        className="btn btn-outline-primary"
+        onClick={() => history.goBack()}
+      >
+        Go Back
+      </button>
       <p>{parking?.fields.address}</p>
     </div>
   );

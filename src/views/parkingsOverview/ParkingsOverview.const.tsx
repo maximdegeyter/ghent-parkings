@@ -2,7 +2,7 @@ import { ParkingFields } from "./ParkingsOverview.types";
 
 export const PARKING_CONST: ParkingFields = {
   totalcapacity_test: 1,
-  open: "string",
+  open: "True",
   id: "string",
   from: "string",
   daysopen: "string",
