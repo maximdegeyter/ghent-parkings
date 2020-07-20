@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import Api from "../../api";
 import { ParkingItemSchema } from "./ParkingsOverview.types";
+import { PARKING_CONST } from "./ParkingsOverview.const";
+import { Link } from "react-router-dom";
 
 const ParkingsOverview = () => {
   const [parkings, setParkings] = useState<ParkingItemSchema[]>([]);
@@ -35,7 +37,13 @@ const ParkingsOverview = () => {
           })
         ) : (
           <tr>
-            <td>Geen data beschikbaar.</td>
+            <td>
+              <Link to={`parking/${PARKING_CONST.description}`}>
+                {PARKING_CONST.name}
+              </Link>
+            </td>
+            <td>{PARKING_CONST.totalcapacity}</td>
+            <td>{PARKING_CONST.availablecapacity}</td>
           </tr>
         )}
       </tbody>
