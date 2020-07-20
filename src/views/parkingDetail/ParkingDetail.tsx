@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 
 import { ParkingItemSchema } from "../parkingsOverview/ParkingsOverview.types";
 import Api from "../../api";
+import { ParkingDetailProps } from "./ParkingDetail.types";
+import { withRouter } from "react-router-dom";
 
-const ParkingDetail = (description: any) => {
+const ParkingDetail: FC<ParkingDetailProps> = ({ match }) => {
   const [parking, setParking] = useState<ParkingItemSchema>();
 
   useEffect(() => {
-    if (description) {
+    if (match.params.id) {
       const api = new Api();
-      api.getOne(description).then((d) => setParking(d.records));
+      api.getOne(match.params.id).then((d) => setParking(d.records));
     }
-  }, [description]);
+  }, [match.params.id]);
 
   return (
     <div className="App">
@@ -21,4 +23,4 @@ const ParkingDetail = (description: any) => {
   );
 };
 
-export default ParkingDetail;
+export default withRouter(ParkingDetail);

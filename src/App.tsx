@@ -11,17 +11,8 @@ const App = () => {
       </header>
       <main>
         <Switch>
-          <Route exact strict path="/">
-            <ParkingsOverview />
-          </Route>
-          <Route
-            exact
-            path="/parking/:description"
-            render={({ match }) => {
-              const { description } = match.params;
-              return <ParkingDetail description={description} />;
-            }}
-          />
+          <Route exact strict path="/" component={ParkingsOverview} />
+          <Route exact path="/parking/:id" component={ParkingDetail} />
         </Switch>
       </main>
     </div>
