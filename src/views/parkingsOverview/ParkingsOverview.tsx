@@ -15,9 +15,38 @@ const ParkingsOverview = () => {
     }
   }, [parkings]);
 
+  const parkHere = (parking: ParkingItemSchema): void => {
+    parking.fields.availablecapacity -= 1;
+    setParkedHere(parking);
+  };
+
+  const leaveParking = (parking: ParkingItemSchema): void => {
+    parking.fields.availablecapacity += 1;
+    setParkedHere(null);
+  };
+
   return (
     <>
-      <table className="table container">
+      <div className="jumbotron">
+        <h2>Welkom!</h2>
+        {parkedHere ? (
+          <>
+            <p className="lead">
+              Je staat geparkeerd in <strong>{parkedHere?.fields.name}</strong>.
+            </p>
+            <hr className="my-4"></hr>
+            <button
+              className="btn btn-outline-danger"
+              onClick={() => leaveParking(parkedHere)}
+            >
+              Verlaat
+            </button>
+          </>
+        ) : (
+          <p className="lead">Je staat nergens geparkeerd.</p>
+        )}
+      </div>
+      <table className="table">
         <thead>
           <tr>
             <th scope="col">Parking</th>
@@ -29,38 +58,65 @@ const ParkingsOverview = () => {
         </thead>
         <tbody>
           {parkings ? (
-            parkings.map((parking) => {
-              return (
-                <tr key={parking.recordid}>
-                  <td>
-                    <Link to={`parking/${parking.fields.description}`}>
-                      {parking.fields.name}
-                    </Link>
-                  </td>
-                  <td>{parking.fields.address}</td>
-                  <td>{parking.fields.availablecapacity}</td>
-                  <td>{parking.fields.totalcapacity}</td>
-                  <td>
-                    {parkedHere?.fields.name === parking.fields.name ? (
-                      <button
-                        className="btn btn-outline-danger"
-                        onClick={() => setParkedHere(null)}
+            parkings
+              .sort((a, b) => {
+                if (a.fields.name < b.fields.name) return -1;
+                if (a.fields.name > b.fields.name) return 1;
+                return 0;
+              })
+              .map((parking) => {
+                return (
+                  <tr key={parking.recordid}>
+                    <td>
+                      <Link
+                        to={{
+                          pathname: `parking/${parking.fields.description}`,
+                          state: parking, 
+                        }}
                       >
-                        Verlaat
-                      </button>
-                    ) : (
-                      <button
-                        className="btn btn-outline-primary"
-                        disabled={parkedHere ? true : false}
-                        onClick={() => setParkedHere(parking)}
+                        {parking.fields.name}
+                      </Link>
+                    </td>
+                    <td>{parking.fields.address}</td>
+                    <td>
+                      <span
+                        className={
+                          parking.fields.availablecapacity /
+                            (parking.fields.totalcapacity / 100) >
+                          50
+                            ? "badge badge-success"
+                            : parking.fields.availablecapacity /
+                                (parking.fields.totalcapacity / 100) >
+                              25
+                            ? "badge badge-warning"
+                            : "badge badge-danger"
+                        }
                       >
-                        Parkeer
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              );
-            })
+                        {parking.fields.availablecapacity}
+                      </span>
+                    </td>
+                    <td>{parking.fields.totalcapacity}</td>
+                    <td>
+                      {parkedHere?.fields.name === parking.fields.name ? (
+                        <button
+                          className="btn btn-outline-danger"
+                          onClick={() => leaveParking(parking)}
+                        >
+                          Verlaat
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-outline-primary"
+                          disabled={parkedHere ? true : false}
+                          onClick={() => parkHere(parking)}
+                        >
+                          Parkeer
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })
           ) : (
             <tr>
               <td>Geen data beschikbaar</td>
@@ -68,13 +124,6 @@ const ParkingsOverview = () => {
           )}
         </tbody>
       </table>
-      <div className="jumbotron">
-        {parkedHere ? (
-          <p>Jij staat geparkeerd op {parkedHere?.fields.name}</p>
-        ) : (
-          <p>Je staat nergens geparkeerd.</p>
-        )}
-      </div>
     </>
   );
 };

@@ -9,7 +9,7 @@ const App = () => {
       <header className="App-header">
         <h1>Ghent Parkings</h1>
       </header>
-      <main>
+      <main className="container-lg">
         <Switch>
           <Route exact strict path="/" component={ParkingsOverview} />
           <Route exact path="/parking/:id" component={ParkingDetail} />
