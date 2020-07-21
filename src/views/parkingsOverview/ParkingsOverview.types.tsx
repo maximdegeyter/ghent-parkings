@@ -10,6 +10,7 @@ export interface ParkingItemSchema {
 }
 
 export interface ParkingFields {
+  parkedHere?: boolean;
   totalcapacity_test: number;
   lastmodifieddate: Date;
   open: string;
