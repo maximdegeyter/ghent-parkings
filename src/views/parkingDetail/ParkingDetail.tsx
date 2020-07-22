@@ -4,7 +4,7 @@ import { withRouter, useHistory } from "react-router-dom";
 import { ParkingDetailProps, openingTimesSchema } from "./ParkingDetail.types";
 import { ParkingItemSchema } from "../parkingsOverview/ParkingsOverview.types";
 
-const ParkingDetail: FC<ParkingDetailProps> = ({ location }) => {
+const ParkingDetail: FC<ParkingDetailProps> = ({ location, parkedHere }) => {
   let history = useHistory();
   const [parking, setParking] = useState<ParkingItemSchema>();
   const [openingTimes, setOpeningTimes] = useState<openingTimesSchema[] | null>(
@@ -29,6 +29,9 @@ const ParkingDetail: FC<ParkingDetailProps> = ({ location }) => {
         Go Back
       </button>
       <h2>{parking.fields.name}</h2>
+      {parkedHere?.fields.name === parking.fields.name ? (
+        <p>Hier geparkeerd</p>
+      ) : null}
       <div className="row">
         <div className="col-md">
           <h3>Adres</h3>

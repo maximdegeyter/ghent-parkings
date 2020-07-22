@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 import Api from "../../api";
-import { ParkingItemSchema } from "./ParkingsOverview.types";
+import { ParkingItemSchema, OverviewProps } from "./ParkingsOverview.types";
 import { Link } from "react-router-dom";
 
-const ParkingsOverview = () => {
+const ParkingsOverview = ({ sendParkedHere, parkedHere }: OverviewProps) => {
   const [parkings, setParkings] = useState<ParkingItemSchema[]>([]);
-  const [parkedHere, setParkedHere] = useState<ParkingItemSchema | null>(null);
 
   useEffect(() => {
     if (parkings?.length <= 0) {
@@ -17,12 +16,12 @@ const ParkingsOverview = () => {
 
   const parkHere = (parking: ParkingItemSchema): void => {
     parking.fields.availablecapacity -= 1;
-    setParkedHere(parking);
+    sendParkedHere(parking);
   };
 
   const leaveParking = (parking: ParkingItemSchema): void => {
     parking.fields.availablecapacity += 1;
-    setParkedHere(null);
+    sendParkedHere(null);
   };
 
   return (
@@ -71,7 +70,7 @@ const ParkingsOverview = () => {
                       <Link
                         to={{
                           pathname: `parking/${parking.fields.description}`,
-                          state: parking, 
+                          state: parking,
                         }}
                       >
                         {parking.fields.name}
