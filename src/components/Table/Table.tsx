@@ -6,7 +6,7 @@ import { TableProps } from "./Table.types";
 const Table = ({ parkings, parkedHere, parkHere, leaveParking }: TableProps) => {
 
   return (
-    <div className="jumbotron bg-white">
+    <div className="jumbotron bg-white table-responsive">
       <table className="table">
         <thead>
           <tr>
