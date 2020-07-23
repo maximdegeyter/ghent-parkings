@@ -14,8 +14,8 @@ const App = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Ghent Parkings</h1>
+      <header className="header bg-info mb-4">
+        <h1 className="text-white container-lg text-center pt-2">Ghent Parkings</h1>
       </header>
       <main className="container-lg">
         <Switch>
