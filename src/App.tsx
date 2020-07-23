@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 
-import ParkingsOverview from "./views/parkingsOverview/ParkingsOverview";
-import ParkingDetail from "./views/parkingDetail/ParkingDetail";
 import { ParkingItemSchema } from "./views/parkingsOverview/ParkingsOverview.types";
+import { ParkingsOverview, ParkingDetail } from "./views";
 
 const App = () => {
   const [parkedHere, setParkedHere] = useState<ParkingItemSchema | null>(null);
@@ -14,8 +13,8 @@ const App = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Ghent Parkings</h1>
+      <header className="header bg-info mb-4">
+        <h1 className="text-white container-lg text-center pt-2">Ghent Parkings</h1>
       </header>
       <main className="container-lg">
         <Switch>

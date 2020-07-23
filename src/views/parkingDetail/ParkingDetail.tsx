@@ -23,40 +23,46 @@ const ParkingDetail: FC<ParkingDetailProps> = ({ location, parkedHere }) => {
     <div className="container-lg">
       <button
         type="button"
-        className="btn btn-outline-primary"
+        className="btn btn-outline-primary mb-4"
         onClick={() => history.goBack()}
       >
         Go Back
       </button>
-      <h2>{parking.fields.name}</h2>
-      {parkedHere?.fields.name === parking.fields.name ? (
-        <p>Hier geparkeerd</p>
-      ) : null}
-      <div className="row">
-        <div className="col-md">
-          <h3>Adres</h3>
-          <p>{parking.fields.address}</p>
+      <div className="jumbotron bg-white">
+        <div className="row">
+          <h2 className="mb-4">
+            {parking.fields.name}{" "}
+            {parkedHere?.fields.name === parking.fields.name ? (
+              <span className="h6 badge badge-primary">Hier geparkeerd</span>
+            ) : null}
+          </h2>
         </div>
-        <div className="col-md">
-          <h3>Openingstijden</h3>
-          <table className="table table-sm table-borderless">
-            <tbody>
-              {openingTimes
-                ? openingTimes[0].days.map((day) => {
-                    return (
-                      <tr>
-                        <td>{day}</td>
-                        <td>{`${openingTimes[0].from} - ${openingTimes[0].to}`}</td>
-                      </tr>
-                    );
-                  })
-                : null}
-            </tbody>
-          </table>
-        </div>
-        <div className="col-md">
-          <h3>Contact</h3>
-          <p>{parking.fields.contactinfo}</p>
+        <div className="row">
+          <div className="col-md">
+            <h3>Adres</h3>
+            <p>{parking.fields.address}</p>
+          </div>
+          <div className="col-md">
+            <h3>Openingstijden</h3>
+            <table className="table table-sm table-borderless">
+              <tbody>
+                {openingTimes
+                  ? openingTimes[0].days.map((day) => {
+                      return (
+                        <tr>
+                          <td>{day}</td>
+                          <td>{`${openingTimes[0].from} - ${openingTimes[0].to}`}</td>
+                        </tr>
+                      );
+                    })
+                  : null}
+              </tbody>
+            </table>
+          </div>
+          <div className="col-md">
+            <h3>Contact</h3>
+            <p>{parking.fields.contactinfo}</p>
+          </div>
         </div>
       </div>
     </div>
