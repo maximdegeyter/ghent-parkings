@@ -15,12 +15,10 @@ const ParkingsOverview = ({ sendParkedHere, parkedHere }: OverviewProps) => {
   }, [parkings]);
 
   const parkHere = (parking: ParkingItemSchema): void => {
-    parking.fields.availablecapacity -= 1;
     sendParkedHere(parking);
   };
 
-  const leaveParking = (parking: ParkingItemSchema): void => {
-    parking.fields.availablecapacity += 1;
+  const leaveParking = (): void => {
     sendParkedHere(null);
   };
 
@@ -36,7 +34,7 @@ const ParkingsOverview = ({ sendParkedHere, parkedHere }: OverviewProps) => {
             <hr className="my-4"></hr>
             <button
               className="btn btn-outline-danger"
-              onClick={() => leaveParking(parkedHere)}
+              onClick={() => leaveParking()}
             >
               Verlaat
             </button>
@@ -91,7 +89,9 @@ const ParkingsOverview = ({ sendParkedHere, parkedHere }: OverviewProps) => {
                             : "badge badge-danger"
                         }
                       >
-                        {parking.fields.availablecapacity}
+                        {parkedHere?.fields.name === parking.fields.name
+                          ? parking.fields.availablecapacity + 1
+                          : parking.fields.availablecapacity}
                       </span>
                     </td>
                     <td>{parking.fields.totalcapacity}</td>
@@ -99,7 +99,7 @@ const ParkingsOverview = ({ sendParkedHere, parkedHere }: OverviewProps) => {
                       {parkedHere?.fields.name === parking.fields.name ? (
                         <button
                           className="btn btn-outline-danger"
-                          onClick={() => leaveParking(parking)}
+                          onClick={() => leaveParking()}
                         >
                           Verlaat
                         </button>
