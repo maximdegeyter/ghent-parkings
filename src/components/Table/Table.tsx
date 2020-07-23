@@ -1,9 +1,12 @@
-import React from "react";
-
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { TableProps } from "./Table.types";
+import { observer } from "mobx-react";
 
-const Table = ({ parkings, parkedHere, parkHere, leaveParking }: TableProps) => {
+import { TableProps } from "./Table.types";
+import store from "../../store";
+
+const Table = ({ parkings }: TableProps) => {
+  const parkedHereStore = useContext(store)
 
   return (
     <div className="jumbotron bg-white table-responsive">
@@ -53,25 +56,25 @@ const Table = ({ parkings, parkedHere, parkHere, leaveParking }: TableProps) => 
                             : "badge badge-danger"
                         }
                       >
-                        {parkedHere?.fields.name === parking.fields.name
+                        {parkedHereStore.parkedHere?.fields.name === parking.fields.name
                           ? parking.fields.availablecapacity - 1
                           : parking.fields.availablecapacity}
                       </span>
                     </td>
                     <td>{parking.fields.totalcapacity}</td>
                     <td>
-                      {parkedHere?.fields.name === parking.fields.name ? (
+                      {parkedHereStore.parkedHere?.fields.name === parking.fields.name ? (
                         <button
                           className="btn btn-outline-danger"
-                          onClick={() => leaveParking()}
+                          onClick={() => parkedHereStore.leaveParking()}
                         >
                           Verlaat
                         </button>
                       ) : (
                         <button
                           className="btn btn-outline-primary"
-                          disabled={parkedHere ? true : false}
-                          onClick={() => parkHere(parking)}
+                          disabled={parkedHereStore.parkedHere ? true : false}
+                          onClick={() => parkedHereStore.parkHere(parking)}
                         >
                           Parkeer
                         </button>
@@ -91,4 +94,4 @@ const Table = ({ parkings, parkedHere, parkHere, leaveParking }: TableProps) => 
   );
 };
 
-export default Table;
+export default observer(Table);

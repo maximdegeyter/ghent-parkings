@@ -38,8 +38,3 @@ export interface ParkingFields {
   parkingstatus: string;
   totalcapacity: number;
 }
-
-export interface OverviewProps {
-  sendParkedHere: any;
-  parkedHere: ParkingItemSchema | null;
-}
