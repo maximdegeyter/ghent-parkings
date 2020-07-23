@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 
-import ParkingsOverview from "./views/parkingsOverview/ParkingsOverview";
-import ParkingDetail from "./views/parkingDetail/ParkingDetail";
 import { ParkingItemSchema } from "./views/parkingsOverview/ParkingsOverview.types";
+import { ParkingsOverview, ParkingDetail } from "./views";
 
 const App = () => {
   const [parkedHere, setParkedHere] = useState<ParkingItemSchema | null>(null);
