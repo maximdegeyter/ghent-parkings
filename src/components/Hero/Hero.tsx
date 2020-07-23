@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import { HeroProps } from "./Hero.types";
+import store from "../../store";
+import { observer } from "mobx-react";
 
-const Hero = ({ parkedHere, leaveParking }: HeroProps) => {
+const Hero = () => {
+  const parkedHereStore = useContext(store);
+
   return (
     <div className="jumbotron bg-white">
       <h2>Welkom!</h2>
-      {parkedHere ? (
+      {parkedHereStore.parkedHere ? (
         <>
           <p className="lead">
-            Je staat geparkeerd in <strong>{parkedHere?.fields.name}</strong>.
+            Je staat geparkeerd in{" "}
+            <strong>{parkedHereStore.parkedHere.fields.name}</strong>.
           </p>
           <hr className="my-4"></hr>
           <button
             className="btn btn-outline-danger"
-            onClick={() => leaveParking()}
+            onClick={() => parkedHereStore.leaveParking()}
           >
             Verlaat
           </button>
@@ -26,4 +30,4 @@ const Hero = ({ parkedHere, leaveParking }: HeroProps) => {
   );
 };
 
-export default Hero;
+export default observer(Hero);

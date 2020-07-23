@@ -11,8 +11,4 @@ export interface openingTimesSchema {
     to: string;
 }
 
-export interface ParkingProp {
- parkedHere: ParkingItemSchema | null;
-}
-
-export type ParkingDetailProps = RouteComponentProps<ParkingDetailParams> & ParkingProp;
+export type ParkingDetailProps = RouteComponentProps<ParkingDetailParams>;

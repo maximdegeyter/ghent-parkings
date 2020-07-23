@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import Api from "../../api";
-import { ParkingItemSchema, OverviewProps } from "./ParkingsOverview.types";
+import { ParkingItemSchema } from "./ParkingsOverview.types";
 import { Hero, Table } from "../../components";
 
-const ParkingsOverview = ({ sendParkedHere, parkedHere }: OverviewProps) => {
+const ParkingsOverview = () => {
   const [parkings, setParkings] = useState<ParkingItemSchema[]>([]);
 
   useEffect(() => {
@@ -14,23 +14,10 @@ const ParkingsOverview = ({ sendParkedHere, parkedHere }: OverviewProps) => {
     }
   }, [parkings]);
 
-  const parkHere = (parking: ParkingItemSchema): void => {
-    sendParkedHere(parking);
-  };
-
-  const leaveParking = (): void => {
-    sendParkedHere(null);
-  };
-
   return (
     <>
-      <Hero parkedHere={parkedHere} leaveParking={leaveParking} />
-      <Table
-        parkings={parkings}
-        parkedHere={parkedHere}
-        parkHere={parkHere}
-        leaveParking={leaveParking}
-      />
+      <Hero />
+      <Table parkings={parkings} />
     </>
   );
 };
