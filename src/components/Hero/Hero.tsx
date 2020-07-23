@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 import store from "../../store";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 
 const Hero = () => {
   const parkedHereStore = useContext(store);

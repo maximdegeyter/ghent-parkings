@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 
 import { TableProps } from "./Table.types";
 import store from "../../store";
