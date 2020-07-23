@@ -4,7 +4,7 @@ import { withRouter, useHistory } from "react-router-dom";
 import { ParkingDetailProps, openingTimesSchema } from "./ParkingDetail.types";
 import { ParkingItemSchema } from "../parkingsOverview/ParkingsOverview.types";
 import store from "../../store";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 
 const ParkingDetail: FC<ParkingDetailProps> = ({ location }) => {
   let history = useHistory();

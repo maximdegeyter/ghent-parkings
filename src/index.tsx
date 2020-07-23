@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import { Provider } from "mobx-react";
 import "bootstrap/dist/css/bootstrap.css";
 
 import "./index.css";
@@ -11,9 +10,7 @@ import store from "./store";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <App />
   </BrowserRouter>,
   document.getElementById("root")
 );
