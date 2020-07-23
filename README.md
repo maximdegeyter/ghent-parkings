@@ -8,7 +8,8 @@ A small web app that fetches data of public parkings from [Ghent Open Data Porta
 | Language | [TypeScript](https://www.typescriptlang.org/) |
 | Framework | [React.js](https://reactjs.org/) |
 | Styling | [Bootstrap](https://getbootstrap.com/) |
-| State management | [React Hooks](https://reactjs.org/docs/hooks-intro.html) |
+| Local State management | [React Hooks](https://reactjs.org/docs/hooks-intro.html) |
+| Global State management | [MobX](https://mobx.js.org/README.html) |
 | Routing | [React Router](https://reactrouter.com/web/guides/quick-start) |
 
 ## Setup
