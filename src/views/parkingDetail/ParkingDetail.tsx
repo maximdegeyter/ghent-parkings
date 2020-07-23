@@ -28,10 +28,14 @@ const ParkingDetail: FC<ParkingDetailProps> = ({ location, parkedHere }) => {
       >
         Go Back
       </button>
-      <h2>{parking.fields.name}</h2>
-      {parkedHere?.fields.name === parking.fields.name ? (
-        <p>Hier geparkeerd</p>
-      ) : null}
+      <div className="row">
+        <h2>
+          {parking.fields.name}{" "}
+          {parkedHere?.fields.name === parking.fields.name ? (
+            <span className="h6 badge badge-primary">Hier geparkeerd</span>
+          ) : null}
+        </h2>
+      </div>
       <div className="row">
         <div className="col-md">
           <h3>Adres</h3>
